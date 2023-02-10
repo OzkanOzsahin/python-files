@@ -9,28 +9,24 @@ from zipfile import ZipFile
 ###
 
 base_path = os.getcwd()
-cache_path = os.path.join(base_path, "cache")
+cache_path = os.path.join(base_path, "files\cache")
 data_path = os.path.join(base_path, "data.zip")
-"""
-Here we create the paths we use in the assignment as global variables, this way you only have to define them once.
-Create the paths using "getcwd()" and "join()" so the paths can be used on every computer and OS.
-"""
 
 # 1
+
+
 
 def clean_cache():
     if os.path.exists(cache_path):
         shutil.rmtree(cache_path)
-    os.mkdir("cache")
-###
-# If "cache" exists, delete the directory. Then make a new directory.
-###
+    os.mkdir(cache_path)
+
 
 # 2
 
 def cache_zip(zip, cache):
     with ZipFile(zip, "r") as zipObj:
-        zipObj.extractall(cache)
+         zipObj.extractall(cache)
 ###
 # Use the zipfile module to extract the zip file in a small amount of code.
 ###
@@ -43,13 +39,7 @@ def cached_files():
         full_path = os.path.join(cache_path, path)
         cached_files_list.append(full_path)
     return cached_files_list
-"""
-Here we do the following:
-    - Use listdir to loop over the name of every file. 
-    - Make the full path with "join()"
-    - Use "append()" to add the path to a predefined list
-    - return the list
-"""
+
 
 
 # 4
@@ -61,15 +51,7 @@ def find_password(list_of_files):
                 if "password" in line:
                     split_line = line.split(" ", 1)
                     return split_line[1].replace("\n", "")
-"""
-Here we do the following:
-    - Loop over every file in a list of files
-    - Open the file in the iteration
-    - Loop over every line in the file
-    - if "password" is found in the line:
-        - split the line 
-        - return the password and remove the newline statement
-"""
+
 
 # This block is only executed when run from "main", and not when imported.
 if __name__ == "__main__":
